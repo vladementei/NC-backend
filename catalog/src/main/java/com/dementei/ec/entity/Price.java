@@ -29,12 +29,11 @@ public class Price {
         if (o == null || getClass() != o.getClass()) return false;
         Price price1 = (Price) o;
         return getId() == price1.getId() &&
-                Double.compare(price1.getPrice(), getPrice()) == 0 &&
-                Objects.equals(getOffer(), price1.getOffer());
+                Double.compare(price1.getPrice(), getPrice()) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPrice(), getOffer());
+        return Objects.hash(getId(), getPrice());
     }
 }
