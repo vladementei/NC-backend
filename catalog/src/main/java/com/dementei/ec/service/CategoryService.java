@@ -13,8 +13,8 @@ public interface CategoryService {
 
     Category getCategoryByName(String categoryName);
 
-    Category updateCategory(Category update);
+    Category updateCategoryName(long id, String newCategoryName);
 
-    void deleteCategory(Category category);
+    void deleteCategory(long id);
 
 }

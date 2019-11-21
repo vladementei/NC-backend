@@ -18,7 +18,7 @@ public interface OfferService {
 
     Offer updateOffer(Offer update);
 
-    Offer updateCategory(Offer offer, Category update);
+    Offer updateCategory(long id, Category update);
 
     void deleteOfferById(long id);
 }
