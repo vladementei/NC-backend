@@ -14,6 +14,8 @@ public interface OrderService {
 
     List<Order> getAllOrders();
 
+    List<OrderItem> getAllOrderItemsByCategory(String customerEmail, String category);
+
     Order addOrderItem(long id, OrderItem item);
 
     Order deleteOrderItem(long id, long itemId);
