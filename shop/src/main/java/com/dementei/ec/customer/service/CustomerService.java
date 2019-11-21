@@ -7,7 +7,7 @@ import java.util.List;
 public interface CustomerService {
     Customer saveCustomer(Customer customer);
 
-    Customer getCustomerById(String email);
+    Customer getCustomerByEmail(String email);
 
     List<Customer> getAllCustomers();
 
