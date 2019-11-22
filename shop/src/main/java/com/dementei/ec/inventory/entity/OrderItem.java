@@ -32,7 +32,7 @@ public class OrderItem {
     @Column(nullable = false)
     private String category = "";
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private Order order;
 
