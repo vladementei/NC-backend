@@ -14,7 +14,10 @@ public class CategoryDto {
 
     @Data
     @AllArgsConstructor
-    private class OfferInfoDto{
+    private static class OfferInfoDto {
+        public OfferInfoDto() {
+        }
+
         private long id;
         private String title;
         private String description;
