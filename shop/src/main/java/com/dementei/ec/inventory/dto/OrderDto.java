@@ -1,5 +1,7 @@
 package com.dementei.ec.inventory.dto;
 
+import com.dementei.ec.inventory.entity.OrderStatus;
+import com.dementei.ec.inventory.entity.PaymentStatus;
 import lombok.Data;
 
 import java.util.Calendar;
@@ -12,6 +14,6 @@ public class OrderDto {
     private Set<OrderItemDto> orderItems = new HashSet<>();
     private String email = "";
     private Calendar timeStamp = Calendar.getInstance();
-    private String paymentStatus = "";
-    private String orderStatus = "";
+    private String paymentStatus = PaymentStatus.NOT_PAID.name();
+    private String orderStatus = OrderStatus.IN_PROCESS.name();
 }
