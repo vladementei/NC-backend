@@ -14,7 +14,11 @@ public interface OrderService {
 
     List<Order> getAllOrders();
 
+    List<Order> getAllOrders(String customerEmail);
+
     List<OrderItem> getAllOrderItemsByCategory(String customerEmail, String category);
+
+    double getAllOrdersTotalPriceByEmail(String customerEmail);
 
     Order addOrderItem(long id, OrderItem item);
 
