@@ -87,8 +87,12 @@ public class OrderController {
 
     @PutMapping(value = "/deleteOrderItem", params = {"id", "itemId"})
     public ResponseEntity<OrderDto> deleteOrderItem(@RequestParam("id") long id, @RequestParam("itemId") long itemId) {
-        Order updatedOrder = orderService.deleteOrderItem(id, itemId);
-        return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
+        Order order = orderService.getOrderById(id);
+        if(order.getPaymentStatus() != PaymentStatus.PAID) {
+            Order updatedOrder = orderService.deleteOrderItem(id, itemId);
+            return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(orderMapper.toDto(order), HttpStatus.OK);
     }
 
     @PutMapping(value = "/changeOrderStatus", params = {"id", "orderStatus"})
