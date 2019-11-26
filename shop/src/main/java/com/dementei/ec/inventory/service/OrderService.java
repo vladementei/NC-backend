@@ -18,6 +18,8 @@ public interface OrderService {
 
     List<OrderItem> getAllOrderItemsByCategory(String customerEmail, String category);
 
+    List<Order> getAllOrders(PaymentStatus paymentStatus);
+
     double getAllOrdersTotalPriceByEmail(String customerEmail);
 
     Order addOrderItem(long id, OrderItem item);

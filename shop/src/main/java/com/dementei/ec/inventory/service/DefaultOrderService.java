@@ -54,6 +54,11 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
+    public List<Order> getAllOrders(PaymentStatus paymentStatus){
+        return this.orderRepository.findAllByPaymentStatus(paymentStatus);
+    }
+
+    @Override
     public double getAllOrdersTotalPriceByEmail(String customerEmail){
         List<Order> orders = getAllOrders(customerEmail);
         return orders.stream().mapToDouble(Order::getOrderPrice).sum();

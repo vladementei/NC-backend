@@ -59,6 +59,13 @@ public class OrderController {
         return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
     }
 
+    @GetMapping("/getAllByPaymentStatus/{paymentStatus}")
+    public ResponseEntity<List<OrderDto>> findAllOrdersByPaymentStatus(@PathVariable("paymentStatus") String paymentStatus) {
+        List<Order> orders = orderService.getAllOrders(PaymentStatus.valueOf(paymentStatus));
+        List<OrderDto> orderDtoList = orders.stream().map(orderMapper::toDto).collect(Collectors.toList());
+        return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
+    }
+
     @GetMapping("/getAllTotalPrice/{email}")
     public ResponseEntity<Double> getAllOrdersTotalPriceByEmail(@PathVariable("email") String email) {
         return new ResponseEntity<>(orderService.getAllOrdersTotalPriceByEmail(email), HttpStatus.OK);
