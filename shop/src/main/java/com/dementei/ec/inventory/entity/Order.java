@@ -23,7 +23,7 @@ public class Order {
     @Column(name = "order_id", nullable = false, unique = true)
     private long id;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @Column(nullable = false)

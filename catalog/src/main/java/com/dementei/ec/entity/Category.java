@@ -22,8 +22,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String category = "";
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //FetchType.EAGER - offers loads together with other fields at the same time
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Offer> offers = new HashSet<>();
 
     @Override

@@ -28,7 +28,7 @@ public class Offer {
     //optional false - this price must be in the 'prices' table
     private Price price;
 
-    @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     //optional false - this category must be in the 'categories' table
     private Category category;
