@@ -2,6 +2,7 @@ package com.dementei.ec.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class OfferDto {
@@ -13,10 +14,8 @@ public class OfferDto {
 
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     private static class CategoryInfoDto{
-        public CategoryInfoDto(){
-        }
-
         private long id;
         private String category;
     }
