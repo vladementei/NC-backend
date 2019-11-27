@@ -2,6 +2,7 @@ package com.dementei.ec.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,8 @@ public class CategoryDto {
 
     @Data
     @AllArgsConstructor
-    private class OfferInfoDto{
+    @NoArgsConstructor
+    private static class OfferInfoDto {
         private long id;
         private String title;
         private String description;

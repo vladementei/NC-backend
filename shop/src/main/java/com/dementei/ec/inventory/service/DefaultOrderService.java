@@ -49,6 +49,22 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
+    public List<Order> getAllOrders(String customerEmail) {
+        return this.orderRepository.findAllByEmail(customerEmail);
+    }
+
+    @Override
+    public List<Order> getAllOrders(PaymentStatus paymentStatus){
+        return this.orderRepository.findAllByPaymentStatus(paymentStatus);
+    }
+
+    @Override
+    public double getAllOrdersTotalPriceByEmail(String customerEmail){
+        List<Order> orders = getAllOrders(customerEmail);
+        return orders.stream().mapToDouble(Order::getOrderPrice).sum();
+    }
+
+    @Override
     public List<OrderItem> getAllOrderItemsByCategory(String customerEmail, String category) {
         List<Order> customerOrders = this.orderRepository.findAllByEmail(customerEmail);
         List<OrderItem> orderItems = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.dementei.ec.dto;
+package com.dementei.ec.processor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class OfferDto {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    private static class CategoryInfoDto{
+    public static class CategoryInfoDto{
         private long id;
         private String category;
     }

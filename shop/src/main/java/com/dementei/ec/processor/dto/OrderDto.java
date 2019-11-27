@@ -1,4 +1,4 @@
-package com.dementei.ec.inventory.dto;
+package com.dementei.ec.processor.dto;
 
 import com.dementei.ec.inventory.entity.OrderStatus;
 import com.dementei.ec.inventory.entity.PaymentStatus;
