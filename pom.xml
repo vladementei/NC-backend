@@ -17,6 +17,7 @@
     <modules>
         <module>catalog</module>
         <module>shop</module>
+        <module>processor</module>
     </modules>
     <packaging>pom</packaging>
 

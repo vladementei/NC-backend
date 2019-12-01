@@ -1,8 +1,8 @@
-package com.dementei.ec.processor.web.controller;
+package com.dementei.ec.web.controller;
 
-import com.dementei.ec.processor.dto.*;
-import com.dementei.ec.processor.transformator.Transformator;
-import com.dementei.ec.processor.web.client.Client;
+import com.dementei.ec.dto.*;
+import com.dementei.ec.transformator.Transformator;
+import com.dementei.ec.web.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

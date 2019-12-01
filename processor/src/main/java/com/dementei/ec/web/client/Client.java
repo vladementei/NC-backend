@@ -1,9 +1,9 @@
-package com.dementei.ec.processor.web.client;
+package com.dementei.ec.web.client;
 
-import com.dementei.ec.processor.dto.CustomerDto;
-import com.dementei.ec.processor.dto.OfferDto;
-import com.dementei.ec.processor.dto.OrderDto;
-import com.dementei.ec.processor.dto.OrderItemDto;
+import com.dementei.ec.dto.CustomerDto;
+import com.dementei.ec.dto.OfferDto;
+import com.dementei.ec.dto.OrderDto;
+import com.dementei.ec.dto.OrderItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;

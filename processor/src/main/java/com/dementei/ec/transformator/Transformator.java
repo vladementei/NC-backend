@@ -1,9 +1,8 @@
-package com.dementei.ec.processor.transformator;
-
-import com.dementei.ec.processor.dto.OfferDto;
-import com.dementei.ec.processor.dto.OrderDto;
-import com.dementei.ec.processor.dto.OrderItemDto;
-import com.dementei.ec.processor.dto.OrderOffersDto;
+package com.dementei.ec.transformator;
+import com.dementei.ec.dto.OfferDto;
+import com.dementei.ec.dto.OrderDto;
+import com.dementei.ec.dto.OrderItemDto;
+import com.dementei.ec.dto.OrderOffersDto;
 import org.springframework.stereotype.Component;
 
 @Component

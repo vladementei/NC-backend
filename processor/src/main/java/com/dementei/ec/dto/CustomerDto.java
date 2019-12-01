@@ -1,4 +1,4 @@
-package com.dementei.ec.processor.dto;
+package com.dementei.ec.dto;
 
 import lombok.Data;
 
