@@ -22,7 +22,7 @@ public class ProcessorController {
         this.transformator = transformator;
     }
 
-    @PostMapping("/order/save")
+    @PostMapping("/order")
     public OrderDto saveOrder(@RequestBody OrderOffersDto orderOffersDto) {
         CustomerDto customerDto = client.getCustomerByEmail(orderOffersDto.getEmail());
         OrderDto orderDto = transformator.transformOrderOffersToOrder(orderOffersDto);
@@ -32,44 +32,44 @@ public class ProcessorController {
         return client.saveOrder(orderDto);
     }
 
-    @PutMapping(value = "/order/addOffer", params = {"orderId", "offerId"})
-    public OrderDto addOfferToOrder(@RequestParam("orderId") long orderId, @RequestParam("offerId") long offerId) {
+    @PutMapping(value = "/order/{id}/add", params = {"offerId"})
+    public OrderDto addOfferToOrder(@PathVariable("id") long orderId, @RequestParam("offerId") long offerId) {
         OfferDto offerDto = client.getOfferById(offerId);
         OrderItemDto orderItemDto = transformator.transformOfferToOrderItem(offerDto);
         return client.addOrderItemToOrder(orderId, orderItemDto);
     }
 
-    @PutMapping(value = "/order/deleteOrderItem", params = {"orderId", "orderItemId"})
-    public OrderDto deleteOrderItemFromOrder(@RequestParam("orderId") long orderId, @RequestParam("orderItemId") long orderItemId) {
+    @PutMapping(value = "/order/{id}/delete", params = "orderItemId")
+    public OrderDto deleteOrderItemFromOrder(@PathVariable("id") long orderId, @RequestParam("orderItemId") long orderItemId) {
         return client.deleteOrderItemFromOrder(orderId, orderItemId);
     }
 
-    @GetMapping("/order/totalSum/{email}")
+    @GetMapping("/{email}/total-sum")
     public double getAllOrdersTotalPriceByEmail(@PathVariable("email") String email) {
         return client.getAllOrdersTotalPriceByEmail(email);
     }
 
-    @GetMapping("/order/ordersAmount/{email}")
+    @GetMapping("/{email}/amount")
     public int getOrdersAmountByEmail(@PathVariable("email") String email) {
         return client.getAllOrdersByEmail(email).size();
     }
 
-    @GetMapping("/order/getAllOrders/{email}")
+    @GetMapping("/{email}/orders")
     public List<OrderDto> getAllOrdersByEmail(@PathVariable("email") String email) {
         return client.getAllOrdersByEmail(email);
     }
 
-    @GetMapping("/order/getAllOrdersByPaymentStatus/{paymentStatus}")
+    @GetMapping("/orders/payment/{paymentStatus}")
     public List<OrderDto> getAllOrdersByPaymentStatus(@PathVariable("paymentStatus") String paymentStatus) {
         return client.getAllOrdersByPaymentStatus(paymentStatus);
     }
 
-    @GetMapping("/order/getById/{id}")
+    @GetMapping("/orders/{id}")
     public OrderDto getOrderById(@PathVariable("id") long id) {
         return client.getOrderById(id);
     }
 
-    @PutMapping("/order/pay/{id}")
+    @PutMapping("/orders/{id}/pay")
     public OrderDto payForOrderById(@PathVariable("id") long id) {
         return client.payForOrder(id);
     }

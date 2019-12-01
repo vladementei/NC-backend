@@ -30,27 +30,27 @@ public class OfferController {
         this.categoryMapper = categoryMapper;
     }
 
-    @PostMapping("/saveOffer")
+    @PostMapping
     public ResponseEntity<OfferDto> saveOffer(@RequestBody OfferDto offerDto) {
         Offer offer = offerMapper.toEntity(offerDto);
         Offer savedOffer = offerService.saveOffer(offer);
         return new ResponseEntity<>(offerMapper.toDto(savedOffer), HttpStatus.OK);
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<OfferDto> findOffer(@PathVariable("id") long id) {
         Offer offer = offerService.getOfferById(id);
         return new ResponseEntity<>(offerMapper.toDto(offer), HttpStatus.OK);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<OfferDto>> findAllOffers() {
         List<Offer> offers = offerService.getAllOffers();
         List<OfferDto> offerDtoList = offers.stream().map(offerMapper::toDto).collect(Collectors.toList());
         return new ResponseEntity<>(offerDtoList, HttpStatus.OK);
     }
 
-    @PostMapping("/findByCategory")
+    @PostMapping("/category")
     public ResponseEntity<List<OfferDto>> findOfferByCategory(@RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto);
         List<Offer> offers = offerService.findOffersByCategory(category);
@@ -58,28 +58,28 @@ public class OfferController {
         return new ResponseEntity<>(offerDtoList, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/findByPrice", params = {"min", "max"})
+    @GetMapping(params = {"min", "max"})
     public ResponseEntity<List<OfferDto>> findOfferByPrice(@RequestParam("min") double min, @RequestParam("max") double max) {
         List<Offer> offers = offerService.findOffersByPrice(min, max);
         List<OfferDto> offerDtoList = offers.stream().map(offerMapper::toDto).collect(Collectors.toList());
         return new ResponseEntity<>(offerDtoList, HttpStatus.OK);
     }
 
-    @PutMapping("/updateOffer")
+    @PutMapping
     public ResponseEntity<OfferDto> updateOffer(@RequestBody OfferDto offerDto) {
         Offer offer = offerMapper.toEntity(offerDto);
         Offer updatedOffer = offerService.updateOffer(offer);
         return new ResponseEntity<>(offerMapper.toDto(updatedOffer), HttpStatus.OK);
     }
 
-    @PutMapping("/updateCategory/{id}")
+    @PutMapping("/{id}/category")
     public ResponseEntity<OfferDto> updateCategory(@PathVariable("id") long id, @RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto);
         Offer updatedOffer = offerService.updateCategory(id, category);
         return new ResponseEntity<>(offerMapper.toDto(updatedOffer), HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteById/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteOffer(@PathVariable("id") long id) {
         offerService.deleteOfferById(id);
         return new ResponseEntity<>(HttpStatus.OK);

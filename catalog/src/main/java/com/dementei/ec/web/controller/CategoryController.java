@@ -27,14 +27,14 @@ public class CategoryController {
         this.categoryMapper = categoryMapper;
     }
 
-    @PostMapping("/saveCategory")
+    @PostMapping
     public ResponseEntity<CategoryDto> saveCategory(@RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto);
         Category savedCategory = categoryService.saveCategory(category);
         return new ResponseEntity<>(categoryMapper.toDto(savedCategory), HttpStatus.OK);
     }
 
-    @PostMapping("/saveCategories")
+    @PostMapping("/categories")
     public ResponseEntity<List<CategoryDto>> saveCategories(@RequestBody List<CategoryDto> categoryDtoList) {
         Set<Category> categories = new HashSet<>();
         categoryDtoList.forEach(categoryDto -> categories.add(categoryMapper.toEntity(categoryDto)));
@@ -43,28 +43,28 @@ public class CategoryController {
         return new ResponseEntity<>(savedCategoryDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<CategoryDto> findCategory(@PathVariable("id") long id) {
         Category category = categoryService.getCategoryById(id);
         CategoryDto categoryDto = categoryMapper.toDto(category);
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
 
-    @GetMapping("/getByName/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<CategoryDto> findCategory(@PathVariable("name") String categoryName) {
         Category category = categoryService.getCategoryByName(categoryName);
         CategoryDto categoryDto = categoryMapper.toDto(category);
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
 
-    @PutMapping("/updateName")
+    @PutMapping
     public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto) {
         Category updatedCategory = categoryService.updateCategoryName(categoryDto.getId(), categoryDto.getCategory());
         CategoryDto updatedCategoryDto = categoryMapper.toDto(updatedCategory);
         return new ResponseEntity<>(updatedCategoryDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteById/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteCategory(@PathVariable("id") long id) {
         categoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.OK);
