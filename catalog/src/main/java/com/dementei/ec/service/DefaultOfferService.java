@@ -60,6 +60,7 @@ public class DefaultOfferService implements OfferService {
         foundedOffer.setTitle(update.getTitle());
         foundedOffer.setDescription(update.getDescription());
         foundedOffer.getPrice().setPrice(update.getPrice().getPrice());
+        foundedOffer.setPhoto(update.getPhoto());
         return this.offerRepository.save(foundedOffer);
     }
 

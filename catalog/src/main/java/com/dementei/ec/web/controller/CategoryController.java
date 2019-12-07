@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/categories")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
     private final CategoryService categoryService;
     private final CategoryMapper categoryMapper;
@@ -43,7 +44,7 @@ public class CategoryController {
         return new ResponseEntity<>(savedCategoryDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("id/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<CategoryDto> findCategory(@PathVariable("id") long id) {
         Category category = categoryService.getCategoryById(id);
         CategoryDto categoryDto = categoryMapper.toDto(category);
@@ -55,6 +56,13 @@ public class CategoryController {
         Category category = categoryService.getCategoryByName(categoryName);
         CategoryDto categoryDto = categoryMapper.toDto(category);
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoryDto>> findAllCategories() {
+        List<Category> categories = categoryService.getAllCategories();
+        List<CategoryDto> categoriesDtoList = categories.stream().map(categoryMapper::toDto).collect(Collectors.toList());
+        return new ResponseEntity<>(categoriesDtoList, HttpStatus.OK);
     }
 
     @PutMapping

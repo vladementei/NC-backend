@@ -8,7 +8,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "offers")
 public class Offer {
@@ -22,6 +21,9 @@ public class Offer {
 
     @Column(nullable = false)
     private String description = "";
+
+    @Column(nullable = false)
+    private String photo = "";
 
     @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "price_id")
@@ -42,11 +44,12 @@ public class Offer {
                 Objects.equals(getTitle(), offer.getTitle()) &&
                 Objects.equals(getDescription(), offer.getDescription()) &&
                 Objects.equals(getPrice(), offer.getPrice()) &&
+                Objects.equals(getPhoto(), offer.getPhoto()) &&
                 Objects.equals(getCategory(), offer.getCategory());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getPrice(), getCategory());
+        return Objects.hash(getId(), getTitle(), getDescription(), getPrice(), getPhoto(), getCategory());
     }
 }

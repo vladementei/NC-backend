@@ -2,6 +2,7 @@ package com.dementei.ec.service;
 
 import com.dementei.ec.entity.Category;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CategoryService {
@@ -10,6 +11,8 @@ public interface CategoryService {
     Set<Category> saveCategories(Set<Category> categories);
 
     Category getCategoryById(long id);
+
+    List<Category> getAllCategories();
 
     Category getCategoryByName(String categoryName);
 

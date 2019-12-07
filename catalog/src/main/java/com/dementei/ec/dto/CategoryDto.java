@@ -21,5 +21,6 @@ public class CategoryDto {
         private String title;
         private String description;
         private double price;
+        private String photo;
     }
 }

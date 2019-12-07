@@ -10,6 +10,7 @@ public class OfferDto {
     private String title = "";
     private String description = "";
     private double price = 0.0;
+    private String photo = "";
     private CategoryInfoDto category = new CategoryInfoDto(0, "");
 
     @Data
