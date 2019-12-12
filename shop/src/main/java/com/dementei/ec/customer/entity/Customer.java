@@ -20,6 +20,16 @@ public class Customer {
     private String email = "";
 
     @Column(nullable = false)
+    private String login = "";
+
+    @Column(nullable = false)
+    private String password = "";
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+    @Column(nullable = false)
     private String surname = "";
 
     @Column(nullable = false)
