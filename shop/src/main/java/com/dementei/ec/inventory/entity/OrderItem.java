@@ -30,6 +30,9 @@ public class OrderItem {
     private double price = 0.0;
 
     @Column(nullable = false)
+    private String photo = "";
+
+    @Column(nullable = false)
     private String category = "";
 
     @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

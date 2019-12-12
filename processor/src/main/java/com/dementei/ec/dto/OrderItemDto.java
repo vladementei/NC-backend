@@ -8,6 +8,7 @@ public class OrderItemDto {
     private String title = "";
     private String description = "";
     private double price = 0.0;
+    private String photo = "";
     private String category = "";
     private long orderId = 0;
 }

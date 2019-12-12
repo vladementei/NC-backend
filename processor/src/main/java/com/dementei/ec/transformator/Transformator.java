@@ -13,6 +13,7 @@ public class Transformator {
         orderItemDto.setTitle(offerDto.getTitle());
         orderItemDto.setDescription(offerDto.getDescription());
         orderItemDto.setPrice(offerDto.getPrice());
+        orderItemDto.setPhoto(offerDto.getPhoto());
         return orderItemDto;
     }
 
