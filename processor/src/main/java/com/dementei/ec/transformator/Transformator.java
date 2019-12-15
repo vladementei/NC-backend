@@ -21,6 +21,9 @@ public class Transformator {
         OrderDto orderDto = new OrderDto();
         orderDto.setEmail(orderOffersDto.getEmail());
         orderDto.setId(orderOffersDto.getId());
+        orderDto.setDeliveryAddress(orderOffersDto.getDeliveryAddress());
+        orderDto.setContactNumber(orderOffersDto.getContactNumber());
+        orderDto.setPaymentType(orderOffersDto.getPaymentType());
         orderDto.setOrderStatus(orderOffersDto.getOrderStatus());
         orderDto.setPaymentStatus(orderOffersDto.getPaymentStatus());
         orderDto.setTimeStamp(orderOffersDto.getTimeStamp());

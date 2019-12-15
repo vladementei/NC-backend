@@ -29,6 +29,16 @@ public class Order {
     @Column(nullable = false)
     private String email = "";
 
+    @Column(nullable = false)
+    private String contactNumber = "";
+
+    @Column(nullable = false)
+    private String deliveryAddress = "";
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType = PaymentType.CASH;
+
     @Column(name = "order_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeStamp = Calendar.getInstance();

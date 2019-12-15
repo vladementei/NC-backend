@@ -1,9 +1,6 @@
 package com.dementei.ec.inventory.service;
 
-import com.dementei.ec.inventory.entity.Order;
-import com.dementei.ec.inventory.entity.OrderItem;
-import com.dementei.ec.inventory.entity.OrderStatus;
-import com.dementei.ec.inventory.entity.PaymentStatus;
+import com.dementei.ec.inventory.entity.*;
 
 import java.util.List;
 
@@ -20,11 +17,19 @@ public interface OrderService {
 
     List<Order> getAllOrders(PaymentStatus paymentStatus);
 
+    Order getLastOrderByEmailAndOrderStatus(String email, OrderStatus orderStatus);
+
     double getAllOrdersTotalPriceByEmail(String customerEmail);
 
     Order addOrderItem(long id, OrderItem item);
 
     Order deleteOrderItem(long id, long itemId);
+
+    Order changeDeliveryAddress(long id, String address);
+
+    Order changeContactNumber(long id, String contactNumber);
+
+    Order changePaymentType(long id, PaymentType paymentType);
 
     Order changeOrderStatus(long id, OrderStatus orderStatus);
 

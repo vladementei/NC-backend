@@ -28,7 +28,7 @@ public class ProcessorController {
         this.transformator = transformator;
     }
 
-    @PostMapping("/order")
+    @PostMapping("/orders")
     public OrderDto saveOrder(@RequestBody OrderOffersDto orderOffersDto) {
         CustomerDto customerDto = customerClient.getCustomerByEmail(orderOffersDto.getEmail());
         OrderDto orderDto = transformator.transformOrderOffersToOrder(orderOffersDto);
@@ -38,14 +38,14 @@ public class ProcessorController {
         return orderClient.saveOrder(orderDto);
     }
 
-    @PutMapping(value = "/order/{id}/add", params = {"offerId"})
+    @PutMapping(value = "/orders/{id}/add", params = {"offerId"})
     public OrderDto addOfferToOrder(@PathVariable("id") long orderId, @RequestParam("offerId") long offerId) {
         OfferDto offerDto = offerClient.getOfferById(offerId);
         OrderItemDto orderItemDto = transformator.transformOfferToOrderItem(offerDto);
         return orderClient.addOrderItemToOrder(orderId, orderItemDto);
     }
 
-    @PutMapping(value = "/order/{id}/delete", params = "orderItemId")
+    @PutMapping(value = "/orders/{id}/delete", params = "orderItemId")
     public OrderDto deleteOrderItemFromOrder(@PathVariable("id") long orderId, @RequestParam("orderItemId") long orderItemId) {
         return orderClient.deleteOrderItemFromOrder(orderId, orderItemId);
     }
@@ -78,5 +78,25 @@ public class ProcessorController {
     @PutMapping("/orders/{id}/pay")
     public OrderDto payForOrderById(@PathVariable("id") long id) {
         return orderClient.payForOrder(id);
+    }
+
+    @PutMapping("/orders/{id}/order-status")
+    public OrderDto changeOrderStatus(@PathVariable("id") long id, @RequestBody String orderStatus) {
+        return orderClient.changeOrderStatus(id, orderStatus);
+    }
+
+    @PutMapping("/orders/{id}/address")
+    public OrderDto changeDeliveryAddress(@PathVariable("id") long id, @RequestBody String address) {
+        return orderClient.changeDeliveryAddress(id, address);
+    }
+
+    @PutMapping("/orders/{id}/contact-number")
+    public OrderDto changeContactNumber(@PathVariable("id") long id, @RequestBody String contactNumber) {
+        return orderClient.changeContactNumber(id, contactNumber);
+    }
+
+    @PutMapping("/orders/{id}/payment-type")
+    public OrderDto changePaymentType(@PathVariable("id") long id, @RequestBody String paymentType) {
+        return orderClient.changePaymentType(id, paymentType);
     }
 }

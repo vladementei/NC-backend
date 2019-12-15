@@ -59,7 +59,7 @@ public class OrderClient {
 
     public OrderDto deleteOrderItemFromOrder(long orderId, long orderItemId) {
         ResponseEntity<OrderDto> response = restTemplate.exchange(
-                ordersUrl + orderId + "/delete?itemId=" + orderItemId, HttpMethod.PUT, null,
+                ordersUrl + orderId + "/delete", HttpMethod.PUT, new HttpEntity<>(orderItemId),
                 new ParameterizedTypeReference<OrderDto>() {});
         return response.getBody();
     }
@@ -73,7 +73,35 @@ public class OrderClient {
 
     public OrderDto payForOrder(long id) {
         ResponseEntity<OrderDto> response = restTemplate.exchange(
-                ordersUrl + id + "?paymentStatus=PAID", HttpMethod.PUT, null,
+                ordersUrl + id +"/payment-status", HttpMethod.PUT, new HttpEntity<>("PAID"),
+                new ParameterizedTypeReference<OrderDto>() {});
+        return response.getBody();
+    }
+
+    public OrderDto changeOrderStatus(long id, String orderStatus) {
+        ResponseEntity<OrderDto> response = restTemplate.exchange(
+                ordersUrl + id + "/order-status", HttpMethod.PUT, new HttpEntity<>(orderStatus),
+                new ParameterizedTypeReference<OrderDto>() {});
+        return response.getBody();
+    }
+
+    public OrderDto changeDeliveryAddress(long id, String address) {
+        ResponseEntity<OrderDto> response = restTemplate.exchange(
+                ordersUrl + id + "/address", HttpMethod.PUT, new HttpEntity<>(address),
+                new ParameterizedTypeReference<OrderDto>() {});
+        return response.getBody();
+    }
+
+    public OrderDto changeContactNumber(long id, String contactNumber) {
+        ResponseEntity<OrderDto> response = restTemplate.exchange(
+                ordersUrl + id + "/contact-number", HttpMethod.PUT, new HttpEntity<>(contactNumber),
+                new ParameterizedTypeReference<OrderDto>() {});
+        return response.getBody();
+    }
+
+    public OrderDto changePaymentType(long id, String paymentType) {
+        ResponseEntity<OrderDto> response = restTemplate.exchange(
+                ordersUrl + id + "/payment-type", HttpMethod.PUT, new HttpEntity<>(paymentType),
                 new ParameterizedTypeReference<OrderDto>() {});
         return response.getBody();
     }

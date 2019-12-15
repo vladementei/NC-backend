@@ -1,10 +1,7 @@
 package com.dementei.ec.inventory.service;
 
 import com.dementei.ec.customer.exception.NotFoundException;
-import com.dementei.ec.inventory.entity.Order;
-import com.dementei.ec.inventory.entity.OrderItem;
-import com.dementei.ec.inventory.entity.OrderStatus;
-import com.dementei.ec.inventory.entity.PaymentStatus;
+import com.dementei.ec.inventory.entity.*;
 import com.dementei.ec.inventory.repository.OrderItemRepository;
 import com.dementei.ec.inventory.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +56,15 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
+    public Order getLastOrderByEmailAndOrderStatus(String email, OrderStatus orderStatus) {
+        List<Order> orders = this.orderRepository.findAllByEmailAndOrderStatus(email, orderStatus);
+        if(orders.size() == 0){
+            throw new NotFoundException("No orders with status " + orderStatus.name());
+        }
+        return orders.get(orders.size() - 1);
+    }
+
+    @Override
     public double getAllOrdersTotalPriceByEmail(String customerEmail){
         List<Order> orders = getAllOrders(customerEmail);
         return orders.stream().mapToDouble(Order::getOrderPrice).sum();
@@ -95,6 +101,26 @@ public class DefaultOrderService implements OrderService {
             }
         }
         return foundedOrder;
+    }
+
+    @Override
+    public Order changeDeliveryAddress(long id, String address) {
+        Order foundedOrder = getOrderById(id);
+        foundedOrder.setDeliveryAddress(address);
+        return this.orderRepository.save(foundedOrder);
+    }
+
+    @Override
+    public Order changeContactNumber(long id, String contactNumber) {
+        Order foundedOrder = getOrderById(id);
+        foundedOrder.setContactNumber(contactNumber);
+        return this.orderRepository.save(foundedOrder);    }
+
+    @Override
+    public Order changePaymentType(long id, PaymentType paymentType) {
+        Order foundedOrder = getOrderById(id);
+        foundedOrder.setPaymentType(paymentType);
+        return this.orderRepository.save(foundedOrder);
     }
 
     @Override

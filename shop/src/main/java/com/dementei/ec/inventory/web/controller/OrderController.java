@@ -2,10 +2,7 @@ package com.dementei.ec.inventory.web.controller;
 
 import com.dementei.ec.inventory.dto.OrderDto;
 import com.dementei.ec.inventory.dto.OrderItemDto;
-import com.dementei.ec.inventory.entity.Order;
-import com.dementei.ec.inventory.entity.OrderItem;
-import com.dementei.ec.inventory.entity.OrderStatus;
-import com.dementei.ec.inventory.entity.PaymentStatus;
+import com.dementei.ec.inventory.entity.*;
 import com.dementei.ec.inventory.mapper.OrderItemMapper;
 import com.dementei.ec.inventory.mapper.OrderMapper;
 import com.dementei.ec.inventory.service.DefaultOrderService;
@@ -66,6 +63,12 @@ public class OrderController {
         return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/email/{email}", params = {"order-status"})
+    public ResponseEntity<OrderDto> findOrderByOrderStatus(@PathVariable("email") String email, @RequestParam("order-status") String orderStatus) {
+        Order order = orderService.getLastOrderByEmailAndOrderStatus(email, OrderStatus.valueOf(orderStatus));
+        return new ResponseEntity<>(orderMapper.toDto(order), HttpStatus.OK);
+    }
+
     @GetMapping("/{email}/total-price")
     public ResponseEntity<Double> getAllOrdersTotalPriceByEmail(@PathVariable("email") String email) {
         return new ResponseEntity<>(orderService.getAllOrdersTotalPriceByEmail(email), HttpStatus.OK);
@@ -85,8 +88,8 @@ public class OrderController {
         return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}/delete", params = {"itemId"})
-    public ResponseEntity<OrderDto> deleteOrderItem(@PathVariable("id") long id, @RequestParam("itemId") long itemId) {
+    @PutMapping(value = "/{id}/delete")
+    public ResponseEntity<OrderDto> deleteOrderItem(@PathVariable("id") long id, @RequestBody long itemId) {
         Order order = orderService.getOrderById(id);
         if(order.getPaymentStatus() != PaymentStatus.PAID) {
             Order updatedOrder = orderService.deleteOrderItem(id, itemId);
@@ -95,17 +98,36 @@ public class OrderController {
         return new ResponseEntity<>(orderMapper.toDto(order), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}", params = {"orderStatus"})
-    public ResponseEntity<OrderDto> changeOrderStatus(@PathVariable("id") long id, @RequestParam("orderStatus") String orderStatus) {
+    @PutMapping(value = "/{id}/order-status")
+    public ResponseEntity<OrderDto> changeOrderStatus(@PathVariable("id") long id, @RequestBody String orderStatus) {
         Order updatedOrder = orderService.changeOrderStatus(id, OrderStatus.valueOf(orderStatus));
         return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}", params = {"paymentStatus"})
-    public ResponseEntity<OrderDto> changePaymentStatus(@PathVariable("id") long id, @RequestParam("paymentStatus") String paymentStatus) {
+    @PutMapping(value = "/{id}/payment-status")
+    public ResponseEntity<OrderDto> changePaymentStatus(@PathVariable("id") long id, @RequestBody String paymentStatus) {
         Order updatedOrder = orderService.changePaymentStatus(id, PaymentStatus.valueOf(paymentStatus));
         return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
     }
+
+    @PutMapping(value = "/{id}/address")
+    public ResponseEntity<OrderDto> changeDeliveryAddress(@PathVariable("id") long id, @RequestBody String address) {
+        Order updatedOrder = orderService.changeDeliveryAddress(id, address);
+        return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{id}/contact-number")
+    public ResponseEntity<OrderDto> changeContactNumber(@PathVariable("id") long id, @RequestBody String contactNumber) {
+        Order updatedOrder = orderService.changeContactNumber(id, contactNumber);
+        return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{id}/payment-type")
+    public ResponseEntity<OrderDto> changePaymentType(@PathVariable("id") long id, @RequestBody String paymentType) {
+        Order updatedOrder = orderService.changePaymentType(id, PaymentType.valueOf(paymentType));
+        return new ResponseEntity<>(orderMapper.toDto(updatedOrder), HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteOrder(@PathVariable("id") long id) {
