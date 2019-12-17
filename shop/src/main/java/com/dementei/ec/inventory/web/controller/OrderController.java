@@ -42,6 +42,11 @@ public class OrderController {
         return new ResponseEntity<>(orderMapper.toDto(order), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/length")
+    public ResponseEntity<Integer> getNumOrderItemsInOrder(@PathVariable("id") long id){
+        return new ResponseEntity<>(orderService.getNumOrderItemsInOrder(id), HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<OrderDto>> findAllOrders() {
         List<Order> orders = orderService.getAllOrders();

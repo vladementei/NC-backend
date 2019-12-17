@@ -71,6 +71,11 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
+    public int getNumOrderItemsInOrder(long orderId) {
+        return getOrderById(orderId).getOrderItems().size();
+    }
+
+    @Override
     public List<OrderItem> getAllOrderItemsByCategory(String customerEmail, String category) {
         List<Order> customerOrders = this.orderRepository.findAllByEmail(customerEmail);
         List<OrderItem> orderItems = new ArrayList<>();

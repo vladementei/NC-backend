@@ -50,6 +50,13 @@ public class OrderClient {
         return response.getBody();
     }
 
+    public Integer getNumOrderItemsInOrder(long id){
+        ResponseEntity<Integer> response = restTemplate.exchange(
+                ordersUrl + id + "/length", HttpMethod.GET, null,
+                new ParameterizedTypeReference<Integer>() {});
+        return response.getBody();
+    }
+
     public OrderDto addOrderItemToOrder(long orderId, OrderItemDto orderItemDto) {
         ResponseEntity<OrderDto> response = restTemplate.exchange(
                 ordersUrl + orderId + "/add", HttpMethod.PUT, new HttpEntity<>(orderItemDto),

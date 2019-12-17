@@ -21,6 +21,8 @@ public interface OrderService {
 
     double getAllOrdersTotalPriceByEmail(String customerEmail);
 
+    int getNumOrderItemsInOrder(long orderId);
+
     Order addOrderItem(long id, OrderItem item);
 
     Order deleteOrderItem(long id, long itemId);

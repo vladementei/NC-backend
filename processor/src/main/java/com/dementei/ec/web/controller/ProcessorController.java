@@ -55,6 +55,11 @@ public class ProcessorController {
         return orderClient.getAllOrdersTotalPriceByEmail(email);
     }
 
+    @GetMapping("orders/{id}/length")
+    public int getNumOrderItemsInOrder(@PathVariable("id") long id){
+        return orderClient.getNumOrderItemsInOrder(id);
+    }
+
     @GetMapping("/{email}/amount")
     public int getOrdersAmountByEmail(@PathVariable("email") String email) {
         return orderClient.getAllOrdersByEmail(email).size();
