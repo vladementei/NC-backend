@@ -1,4 +1,4 @@
-package com.dementei.ec.customer.exception;
+package com.dementei.ec.exception;
 
 public class NotFoundException extends NullPointerException {
 

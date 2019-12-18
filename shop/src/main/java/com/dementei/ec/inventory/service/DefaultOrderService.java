@@ -1,6 +1,6 @@
 package com.dementei.ec.inventory.service;
 
-import com.dementei.ec.customer.exception.NotFoundException;
+import com.dementei.ec.exception.NotFoundException;
 import com.dementei.ec.inventory.entity.*;
 import com.dementei.ec.inventory.repository.OrderItemRepository;
 import com.dementei.ec.inventory.repository.OrderRepository;

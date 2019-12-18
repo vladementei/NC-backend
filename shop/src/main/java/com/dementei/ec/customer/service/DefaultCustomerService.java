@@ -2,7 +2,7 @@ package com.dementei.ec.customer.service;
 
 
 import com.dementei.ec.customer.entity.Customer;
-import com.dementei.ec.customer.exception.NotFoundException;
+import com.dementei.ec.exception.NotFoundException;
 import com.dementei.ec.customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
