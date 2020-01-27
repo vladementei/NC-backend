@@ -39,6 +39,18 @@ public class CustomerController {
         return new ResponseEntity<>(customerMapper.toDto(customer), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/login", params = {"email", "password"})
+    public ResponseEntity<CustomerDto> loginCustomer(@RequestParam("email") String email, @RequestParam("password") String password){
+        Customer customer = customerService.getCustomerByEmail(email);
+        if(customer.getPassword().equals(password)){
+            CustomerDto customerDto = customerMapper.toDto(customer);
+            customerDto.setPassword("");
+            return new ResponseEntity<>(customerDto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
     @GetMapping
     public ResponseEntity<List<CustomerDto>> findAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
